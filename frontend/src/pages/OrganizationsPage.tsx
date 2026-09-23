@@ -1,5 +1,5 @@
 import { ArrowUpRight, ChevronDown, ChevronRight, Folder, Plus, Search } from 'lucide-react'
-import { useMemo, useState } from 'react'
+import { type FormEvent, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import type { Organization } from '../shared/types'
@@ -169,11 +169,27 @@ const facultyNames = [
   'Энергетического строительства',
 ]
 
+type NewOrganizationForm = {
+  shortName: string
+  fullName: string
+  legalAddress: string
+  department: string
+}
+
+const initialNewOrganization: NewOrganizationForm = {
+  shortName: '',
+  fullName: '',
+  legalAddress: '',
+  department: '',
+}
+
 export function OrganizationsPage() {
   const [query, setQuery] = useState('')
   const [facultyQuery, setFacultyQuery] = useState('')
   const [selectedFaculty, setSelectedFaculty] = useState('Все факультеты')
   const [year, setYear] = useState('Любой год окончания')
+  const [isCreateModalOpen, setCreateModalOpen] = useState(false)
+  const [newOrganization, setNewOrganization] = useState<NewOrganizationForm>(initialNewOrganization)
   const filteredRows = useMemo(
     () =>
       rows.filter(
@@ -195,6 +211,13 @@ export function OrganizationsPage() {
     document
       .getElementById('organization-stats')
       ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  const updateNewOrganization = (field: keyof NewOrganizationForm, value: string) =>
+    setNewOrganization((current) => ({ ...current, [field]: value }))
+  const saveNewOrganization = (event: FormEvent) => {
+    event.preventDefault()
+    setCreateModalOpen(false)
+    setNewOrganization(initialNewOrganization)
+  }
 
   return (
     <>
@@ -207,12 +230,59 @@ export function OrganizationsPage() {
             <button className="secondary" type="button" onClick={goToStatistics}>
               К статистике
             </button>
-            <button className="primary">
+            <button className="primary" type="button" onClick={() => setCreateModalOpen(true)}>
               <Plus size={17} /> Добавить организацию
             </button>
           </div>
         }
       />
+      {isCreateModalOpen && (
+        <div
+          className="modal-backdrop"
+          role="presentation"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) setCreateModalOpen(false)
+          }}
+        >
+          <form className="new-organization-modal" onSubmit={saveNewOrganization}>
+            <h2>Новая организация</h2>
+            <label className="new-organization-field">
+              Краткое наименование
+              <input
+                value={newOrganization.shortName}
+                onChange={(event) => updateNewOrganization('shortName', event.target.value)}
+                required
+              />
+            </label>
+            <label className="new-organization-field">
+              Полное наименование
+              <input
+                value={newOrganization.fullName}
+                onChange={(event) => updateNewOrganization('fullName', event.target.value)}
+                required
+              />
+            </label>
+            <label className="new-organization-field">
+              Юридический адрес
+              <input
+                value={newOrganization.legalAddress}
+                onChange={(event) => updateNewOrganization('legalAddress', event.target.value)}
+                required
+              />
+            </label>
+            <label className="new-organization-field">
+              Ведомство
+              <input
+                value={newOrganization.department}
+                onChange={(event) => updateNewOrganization('department', event.target.value)}
+              />
+            </label>
+            <button className="primary new-organization-submit" type="submit">
+              Создать карточку
+            </button>
+          </form>
+        </div>
+      )}
       <section className={styles.registry}>
         <aside className={styles.facultyTree}>
           <div className={styles.facultyTitle}>ДЕРЕВО ФАКУЛЬТЕТОВ</div>

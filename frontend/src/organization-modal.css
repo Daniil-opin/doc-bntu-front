@@ -449,6 +449,62 @@
   font-size: 11px;
 }
 
+.new-organization-modal {
+  width: min(100%, 520px);
+  background: #ffffff;
+  border: 1px solid #e4eaf2;
+  border-radius: 10px;
+  padding: 18px 18px 16px;
+  box-shadow: 0 20px 60px rgba(18, 30, 48, 0.16);
+}
+
+.new-organization-modal h2 {
+  margin: 0 0 14px;
+  color: #1d2431;
+  font-size: 26px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.new-organization-field {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 14px;
+  color: #2a3551;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.new-organization-field input {
+  width: 100%;
+  height: 42px;
+  border: 1px solid #d6deeb;
+  border-radius: 7px;
+  padding: 0 12px;
+  background: #fff;
+  color: #1f2a3b;
+  font: inherit;
+  font-size: 14px;
+  outline: 0;
+}
+
+.new-organization-field input:focus {
+  border-color: #86aafc;
+  box-shadow: 0 0 0 3px #eaf0ff;
+}
+
+.new-organization-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 42px;
+  margin-top: 6px;
+  border-radius: 7px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
 @media (max-width: 560px) {
   .requisites-modal {
     padding: 18px;
@@ -461,5 +517,13 @@
   .modal-actions button {
     width: 100%;
     justify-content: center;
+  }
+
+  .new-organization-modal {
+    padding: 16px 14px 14px;
+  }
+
+  .new-organization-submit {
+    font-size: 15px;
   }
 }
