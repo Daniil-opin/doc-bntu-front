@@ -37,10 +37,29 @@
 }
 
 .editButton {
+  display: inline-flex;
+  align-items: center;
   margin-top: 12px;
-  padding: 0;
-  border: 0;
-  background: transparent;
+  padding: 8px 10px;
+  border: 1px solid #dbe5f3;
+  border-radius: 5px;
+  background: #fff;
   color: var(--blue);
-  font-size: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  transition:
+    border-color 0.16s,
+    background-color 0.16s,
+    box-shadow 0.16s;
+}
+
+.editButton:hover {
+  border-color: #a9c3ed;
+  background: #f7faff;
+}
+
+.editButton:focus-visible {
+  outline: 0;
+  border-color: #86aafc;
+  box-shadow: 0 0 0 3px #eaf0ff;
 }
