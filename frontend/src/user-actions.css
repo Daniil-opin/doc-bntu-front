@@ -1,0 +1,1 @@
+.user-actions{display:inline-flex;align-items:center;gap:12px}.delete-action{display:grid;place-items:center;padding:4px;color:#c96868;background:transparent;border-radius:5px}.delete-action:hover:not(:disabled){background:#fff0ef;color:#b84f50}.delete-action:disabled{color:#c8ced8;cursor:not-allowed}
