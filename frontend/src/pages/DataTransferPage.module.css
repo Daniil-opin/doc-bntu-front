@@ -1,0 +1,117 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 28px;
+  min-height: 280px;
+}
+
+.icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 23px;
+}
+
+.importIcon {
+  color: #246bfd;
+  background: #e9f0ff;
+}
+
+.exportIcon {
+  color: #25856f;
+  background: #e5f6f0;
+}
+
+.card h2 {
+  font: 700 18px Manrope;
+  color: #26354d;
+  margin: 0 0 10px;
+}
+
+.card p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+  max-width: 390px;
+  margin: 0 0 25px;
+}
+
+.selectedFile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 10px;
+  margin-top: 16px;
+  color: var(--blue);
+  font-size: 12px;
+}
+
+.selectedFile span {
+  display: grid;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+
+.selectedFile span small {
+  color: #9aa4b2;
+  font-size: 10px;
+}
+
+.selectedFile button {
+  padding: 8px 10px;
+  font-size: 11px;
+}
+
+.note {
+  display: block;
+  color: #9aa4b2;
+  font-size: 10px;
+  margin-top: 18px;
+}
+
+.message {
+  margin-top: 18px;
+}
+
+.successMessage {
+  color: #25856f;
+  background: #e6f6f1;
+  border-radius: 7px;
+  padding: 12px 15px;
+  font-size: 12px;
+}
+
+.errorMessage {
+  color: #bd5353;
+}
+
+@media (max-width: 700px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    min-height: 0;
+  }
+
+  .selectedFile {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .selectedFile button {
+    margin-left: 26px;
+  }
+}

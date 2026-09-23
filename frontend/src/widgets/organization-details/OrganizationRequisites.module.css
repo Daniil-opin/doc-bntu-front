@@ -1,0 +1,46 @@
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 17px 15px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #26354d;
+  font: 700 13px Manrope;
+  margin: 0 0 9px;
+}
+
+.details {
+  margin: 0;
+  display: grid;
+  gap: 7px;
+}
+
+.detail {
+  display: grid;
+  grid-template-columns: 94px 1fr;
+  gap: 8px;
+  font-size: 10px;
+}
+
+.label {
+  color: #8290a4;
+}
+
+.value {
+  margin: 0;
+  color: #445671;
+}
+
+.editButton {
+  margin-top: 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--blue);
+  font-size: 10px;
+}

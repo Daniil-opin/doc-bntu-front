@@ -1,0 +1,51 @@
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 17px 15px;
+}
+
+.title {
+  color: #26354d;
+  font: 700 13px Manrope;
+  margin: 0 0 9px;
+}
+
+.fieldLabel {
+  display: block;
+  color: #64738b;
+  font-size: 10px;
+}
+
+.facultyPicker {
+  position: relative;
+  margin-top: 7px;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 7px;
+  margin-top: 12px;
+}
+
+.fields input {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 8px 9px;
+  color: var(--ink);
+  font-size: 10px;
+}
+
+.submit {
+  padding: 8px 14px;
+  font-size: 10px;
+}
+
+.error {
+  display: block;
+  margin-top: 6px;
+  color: #bd5353;
+  font-size: 10px;
+}

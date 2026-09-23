@@ -1,0 +1,106 @@
+.modal {
+  width: min(100%, 500px);
+  background: #fff;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 20px 60px #17223833;
+}
+
+.title {
+  margin: 0;
+  color: #26354d;
+  font: 700 18px Manrope;
+}
+
+.fields {
+  display: grid;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+  color: #52627b;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.field input:not([type='checkbox']) {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 10px 11px;
+  color: var(--ink);
+  outline: 0;
+}
+
+.field input:not([type='checkbox']):focus {
+  border-color: #86aafc;
+  box-shadow: 0 0 0 3px #eaf0ff;
+}
+
+.facultyPicker {
+  position: relative;
+}
+
+.facultyTrigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #78a9ff;
+  border-radius: 6px;
+  background: #fff;
+  color: #445671;
+  padding: 10px 11px;
+  font-size: 11px;
+  text-align: left;
+}
+
+.dropdown {
+  position: absolute;
+  z-index: 4;
+  top: calc(100% + 5px);
+  left: 0;
+  width: 100%;
+  padding: 9px;
+  background: #fff;
+  border: 1px solid #dce4ef;
+  border-radius: 6px;
+  box-shadow: 0 10px 25px #17223824;
+}
+
+.search {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 7px 8px;
+  font-size: 11px;
+  outline: 0;
+}
+
+.optionList {
+  display: grid;
+  gap: 2px;
+  max-height: 220px;
+  overflow-y: auto;
+  margin-top: 7px;
+  padding-right: 3px;
+}
+
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 6px;
+  color: #52627b;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.option input {
+  margin: 1px 0 0;
+  accent-color: var(--blue);
+}

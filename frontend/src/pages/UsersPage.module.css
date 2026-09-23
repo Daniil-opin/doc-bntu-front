@@ -1,0 +1,21 @@
+.actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.deleteAction {
+  display: grid;
+  place-items: center;
+  padding: 4px;
+  color: #c96868;
+  background: transparent;
+  border-radius: 5px;
+}
+.deleteAction:hover:not(:disabled) {
+  background: #fff0ef;
+  color: #b84f50;
+}
+.deleteAction:disabled {
+  color: #c8ced8;
+  cursor: not-allowed;
+}

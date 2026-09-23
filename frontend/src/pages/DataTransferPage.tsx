@@ -1,7 +1,9 @@
-import { ChangeEvent, useRef, useState } from 'react'
 import { Download, FileSpreadsheet, Upload } from 'lucide-react'
+import { ChangeEvent, useRef, useState } from 'react'
+
+import { dataTransferApi } from '../features/data-transfer/api/dataTransferApi'
 import { PageHeader } from '../shared/ui/PageHeader'
-import { exportExcel, importExcel } from '../shared/api/client'
+import styles from './DataTransferPage.module.css'
 
 export function DataTransferPage() {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -19,29 +21,94 @@ export function DataTransferPage() {
 
   const upload = async () => {
     if (!selectedFile) return
-    setBusy('import'); setMessage(''); setError('')
+    setBusy('import')
+    setMessage('')
+    setError('')
     try {
-      await importExcel(selectedFile)
+      await dataTransferApi.importExcel(selectedFile)
       setMessage(`Файл «${selectedFile.name}» успешно загружен.`)
       setSelectedFile(null)
       if (inputRef.current) inputRef.current.value = ''
     } catch {
       setError('Не удалось импортировать файл. Проверьте формат .xlsx и доступ к серверу.')
-    } finally { setBusy(null) }
+    } finally {
+      setBusy(null)
+    }
   }
 
   const download = async () => {
-    setBusy('export'); setMessage(''); setError('')
+    setBusy('export')
+    setMessage('')
+    setError('')
     try {
-      const blob = await exportExcel()
+      const blob = await dataTransferApi.exportExcel()
       const url = URL.createObjectURL(blob)
       const link = document.createElement('a')
-      link.href = url; link.download = 'registry-export.xlsx'; link.click()
+      link.href = url
+      link.download = 'registry-export.xlsx'
+      link.click()
       URL.revokeObjectURL(url)
       setMessage('Экспорт реестра завершён.')
-    } catch { setError('Не удалось экспортировать данные. Проверьте доступ к серверу.') }
-    finally { setBusy(null) }
+    } catch {
+      setError('Не удалось экспортировать данные. Проверьте доступ к серверу.')
+    } finally {
+      setBusy(null)
+    }
   }
 
-  return <><PageHeader eyebrow="РАБОЧЕЕ ПРОСТРАНСТВО" title="Импорт и экспорт" description="Обмен данными реестра с Excel-файлами" /><div className="transfer-grid"><section className="transfer-card"><div className="transfer-icon import-icon"><Upload size={22} /></div><h2>Импорт данных</h2><p>Загрузите Excel-файл, чтобы добавить организации, договоры и кадровую потребность в реестр.</p><input ref={inputRef} type="file" accept=".xlsx" onChange={chooseFile} hidden /><button className="secondary" type="button" onClick={() => inputRef.current?.click()}><FileSpreadsheet size={17} /> Выбрать файл</button>{selectedFile && <div className="selected-file"><FileSpreadsheet size={16} /><span>{selectedFile.name}<small>{Math.ceil(selectedFile.size / 1024)} КБ</small></span><button className="primary" type="button" onClick={upload} disabled={busy !== null}>{busy === 'import' ? 'Загрузка...' : 'Импортировать'}</button></div>}</section><section className="transfer-card"><div className="transfer-icon export-icon"><Download size={22} /></div><h2>Экспорт данных</h2><p>Скачайте полный реестр в формате Excel для анализа, резервного копирования или обмена.</p><button className="primary" type="button" onClick={download} disabled={busy !== null}><Download size={17} />{busy === 'export' ? 'Формирование...' : 'Скачать Excel'}</button><small className="transfer-note">Экспортируются организации, договоры, факультеты и кадровая потребность.</small></section></div>{message && <div className="transfer-message success-box-inline">{message}</div>}{error && <div className="transfer-message error">{error}</div>}</>
+  return (
+    <>
+      <PageHeader
+        eyebrow="РАБОЧЕЕ ПРОСТРАНСТВО"
+        title="Импорт и экспорт"
+        description="Обмен данными реестра с Excel-файлами"
+      />
+      <div className={styles.grid}>
+        <section className={styles.card}>
+          <div className={`${styles.icon} ${styles.importIcon}`}>
+            <Upload size={22} />
+          </div>
+          <h2>Импорт данных</h2>
+          <p>
+            Загрузите Excel-файл, чтобы добавить организации, договоры и кадровую потребность в
+            реестр.
+          </p>
+          <input ref={inputRef} type="file" accept=".xlsx" onChange={chooseFile} hidden />
+          <button className="secondary" type="button" onClick={() => inputRef.current?.click()}>
+            <FileSpreadsheet size={17} /> Выбрать файл
+          </button>
+          {selectedFile && (
+            <div className={styles.selectedFile}>
+              <FileSpreadsheet size={16} />
+              <span>
+                {selectedFile.name}
+                <small>{Math.ceil(selectedFile.size / 1024)} КБ</small>
+              </span>
+              <button className="primary" type="button" onClick={upload} disabled={busy !== null}>
+                {busy === 'import' ? 'Загрузка...' : 'Импортировать'}
+              </button>
+            </div>
+          )}
+        </section>
+        <section className={styles.card}>
+          <div className={`${styles.icon} ${styles.exportIcon}`}>
+            <Download size={22} />
+          </div>
+          <h2>Экспорт данных</h2>
+          <p>
+            Скачайте полный реестр в формате Excel для анализа, резервного копирования или обмена.
+          </p>
+          <button className="primary" type="button" onClick={download} disabled={busy !== null}>
+            <Download size={17} />
+            {busy === 'export' ? 'Формирование...' : 'Скачать Excel'}
+          </button>
+          <small className={styles.note}>
+            Экспортируются организации, договоры, факультеты и кадровая потребность.
+          </small>
+        </section>
+      </div>
+      {message && <div className={`${styles.message} ${styles.successMessage}`}>{message}</div>}
+      {error && <div className={`${styles.message} ${styles.errorMessage}`}>{error}</div>}
+    </>
+  )
 }

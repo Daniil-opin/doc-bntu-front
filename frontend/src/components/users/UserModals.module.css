@@ -1,0 +1,37 @@
+.deleteModalIcon {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 18px;
+  border-radius: 50%;
+  color: #c96868;
+  background: #fff0ef;
+}
+.deleteEyebrow {
+  color: #c96868;
+}
+.deleteModal :global(.modal-header) {
+  margin-bottom: 4px;
+}
+.deleteModal h2 {
+  font-size: 20px;
+}
+.deleteModal :global(.modal-actions) {
+  margin-top: 24px;
+}
+.dangerButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 7px;
+  background: #c95858;
+  color: #fff;
+  padding: 10px 14px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.dangerButton:hover {
+  background: #b84747;
+}

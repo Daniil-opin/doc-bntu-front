@@ -1,0 +1,248 @@
+.actions {
+  display: flex;
+  gap: 9px;
+}
+.actions button {
+  font-size: 11px;
+}
+.registry {
+  display: grid;
+  grid-template-columns: 155px minmax(0, 1fr);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fff;
+  overflow: hidden;
+}
+.facultyTree {
+  border-right: 1px solid var(--line);
+  padding: 14px 7px;
+  min-width: 0;
+}
+.facultyTitle {
+  font-size: 8px;
+  line-height: 1.2;
+  color: #7b8799;
+  margin: 0 7px 10px;
+}
+.facultySearch {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 5px 6px;
+  color: #8c98aa;
+  margin: 0 0 9px;
+}
+.facultySearch input,
+.registrySearch input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  width: 100%;
+  min-width: 0;
+  color: var(--ink);
+  font-size: 9px;
+}
+.facultySearch input::placeholder,
+.registrySearch input::placeholder {
+  color: #9ba5b3;
+}
+.facultyRoot,
+.facultyItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 3px;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  color: #6e7b90;
+  font-size: 9px;
+  line-height: 1.25;
+  padding: 6px 4px;
+  border-radius: 4px;
+}
+.facultyRoot span,
+.facultyItem span {
+  flex: 1;
+}
+.facultyRoot b,
+.facultyItem b {
+  font-size: 8px;
+  font-weight: 500;
+  color: #a1aaba;
+}
+.selected {
+  background: #eaf1ff;
+  color: var(--blue);
+}
+.facultyItem svg:nth-child(2) {
+  color: #e9ad38;
+  flex: none;
+  margin-top: 1px;
+}
+.registryMain {
+  min-width: 0;
+}
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px;
+  border-bottom: 1px solid var(--line);
+}
+.registrySearch {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 7px 8px;
+  flex: 1;
+  min-width: 150px;
+  color: #8c98aa;
+}
+.toolbar :global(.registry-filter-select) {
+  flex: 0 0 145px;
+  width: 145px;
+  font-size: 9px;
+}
+.toolbar :global(.registry-year-select) {
+  flex-basis: 128px;
+  width: 128px;
+}
+.toolbar :global(.registry-filter-select .select-trigger) {
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 5px;
+  color: #40516b;
+  font-size: 9px;
+}
+.toolbar :global(.registry-filter-select .select-menu) {
+  border-radius: 5px;
+  max-height: 260px;
+  overflow-y: auto;
+}
+.toolbar :global(.registry-filter-select .select-search),
+.toolbar :global(.registry-filter-select .select-search input) {
+  font-size: 9px;
+}
+.toolbar :global(.registry-filter-select .select-option) {
+  padding: 8px;
+  font-size: 9px;
+}
+.filterButton {
+  border: 0;
+  border-radius: 5px;
+  background: #edf4ff;
+  color: var(--blue);
+  padding: 8px 10px;
+  font-size: 9px;
+  white-space: nowrap;
+}
+.tableWrap {
+  overflow: auto;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 9px;
+  color: #4d5d75;
+}
+.table th {
+  background: #fafbfd;
+  color: #7d899c;
+  text-align: left;
+  font-size: 8px;
+  font-weight: 500;
+  padding: 8px 7px;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+.table td {
+  padding: 8px 7px;
+  border-bottom: 1px solid #edf0f4;
+  vertical-align: middle;
+}
+.table tr:last-child td {
+  border-bottom: 0;
+}
+.activeRow {
+  background: #f0f6ff;
+}
+.table th:nth-child(1) {
+  width: 105px;
+}
+.table th:nth-child(2) {
+  width: 150px;
+}
+.table th:nth-child(3) {
+  width: 280px;
+}
+.table th:nth-child(4) {
+  width: 75px;
+}
+.table th:nth-child(5) {
+  width: 85px;
+}
+.organization {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #243c60;
+  text-decoration: none;
+  font-weight: 700;
+}
+.organization svg {
+  color: var(--blue);
+}
+.status,
+.date {
+  display: inline-block;
+  padding: 4px 6px;
+  border-radius: 10px;
+  background: #e2f7ed;
+  color: #2a9c78;
+  font-size: 8px;
+  white-space: nowrap;
+}
+.date {
+  border-radius: 4px;
+}
+.table td:last-child {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@media (max-width: 900px) {
+  .registry {
+    grid-template-columns: 1fr;
+  }
+  .facultyTree {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    max-height: 190px;
+    overflow: auto;
+  }
+  .toolbar {
+    flex-wrap: wrap;
+  }
+  .registrySearch {
+    flex-basis: 100%;
+  }
+}
+@media (max-width: 620px) {
+  .actions {
+    flex-wrap: wrap;
+  }
+  .toolbar :global(.registry-filter-select),
+  .filterButton {
+    flex: 1;
+    max-width: none;
+  }
+  .table {
+    min-width: 850px;
+  }
+}

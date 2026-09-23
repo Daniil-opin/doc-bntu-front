@@ -1,1 +1,90 @@
-.sidebar{z-index:10;transition:width .2s ease;box-shadow:8px 0 24px #17223812}.main-content{margin-left:76px;transition:margin-left .2s ease}.logo{border:0;background:transparent;cursor:pointer;text-align:left}.sidebar-collapsed .sidebar{width:76px;padding-left:17px;padding-right:17px;box-shadow:none}.sidebar-collapsed .main-content{margin-left:76px}.sidebar-collapsed .logo{justify-content:center}.sidebar-collapsed .logo>span:last-child{display:none}.sidebar-collapsed .workspace-label{visibility:hidden}.sidebar-collapsed nav{display:grid}.sidebar-collapsed nav a{justify-content:center;padding-left:8px;padding-right:8px}.sidebar-collapsed nav a span{display:none}.sidebar-collapsed .connection{display:none}.sidebar-collapsed .sidebar-bottom{display:block;margin-top:auto}.sidebar-collapsed .user-menu{justify-content:center;padding-left:7px;padding-right:7px}.sidebar-collapsed .user-menu .avatar,.sidebar-collapsed .user-menu>span:nth-child(2){display:none}@media(max-width:760px){.sidebar-collapsed .sidebar{width:62px;padding-left:12px;padding-right:12px}.sidebar-collapsed .main-content{margin-left:62px}.main-content{margin-left:62px}}
+.sidebar {
+  z-index: 10;
+  transition: width 0.2s ease;
+  box-shadow: 8px 0 24px #17223812;
+}
+
+.main-content {
+  margin-left: 76px;
+  transition: margin-left 0.2s ease;
+}
+
+.logo {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+.sidebar-collapsed .sidebar {
+  width: 76px;
+  padding-left: 17px;
+  padding-right: 17px;
+  box-shadow: none;
+}
+
+.sidebar-collapsed .main-content {
+  margin-left: 76px;
+}
+
+.sidebar-collapsed .logo {
+  justify-content: center;
+}
+
+.sidebar-collapsed .logo > span:last-child {
+  display: none;
+}
+
+.sidebar-collapsed .workspace-label {
+  visibility: hidden;
+}
+
+.sidebar-collapsed nav {
+  display: grid;
+}
+
+.sidebar-collapsed nav a {
+  justify-content: center;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.sidebar-collapsed nav a span {
+  display: none;
+}
+
+.sidebar-collapsed .connection {
+  display: none;
+}
+
+.sidebar-collapsed .sidebar-bottom {
+  display: block;
+  margin-top: auto;
+}
+
+.sidebar-collapsed .user-menu {
+  justify-content: center;
+  padding-left: 7px;
+  padding-right: 7px;
+}
+
+.sidebar-collapsed .user-menu .avatar,
+.sidebar-collapsed .user-menu > span:nth-child(2) {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .sidebar-collapsed .sidebar {
+    width: 62px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .sidebar-collapsed .main-content {
+    margin-left: 62px;
+  }
+
+  .main-content {
+    margin-left: 62px;
+  }
+}

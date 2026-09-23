@@ -1,0 +1,230 @@
+.agreementModal,
+.contractEditModal {
+  width: min(100%, 540px);
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 20px 60px #17223833;
+}
+.agreementModal h2,
+.contractEditModal h2 {
+  margin: 0;
+  color: #26354d;
+  font:
+    700 19px Manrope,
+    sans-serif;
+}
+.agreementFields,
+.contractEditFields {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 22px;
+}
+.agreementFields label,
+.contractEditFields label {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  color: #52627b;
+  font-size: 12px;
+  font-weight: 600;
+}
+.agreementFields input,
+.contractEditFields input {
+  width: 100%;
+  height: 42px;
+  min-width: 0;
+  border: 1px solid #dce3ed;
+  border-radius: 7px;
+  padding: 0 12px;
+  background: #fff;
+  color: var(--ink);
+  outline: 0;
+}
+.agreementFields input:focus,
+.contractEditFields input:focus {
+  border-color: #86aafc;
+  box-shadow: 0 0 0 3px #eaf0ff;
+}
+.agreementModal :global(.modal-actions),
+.contractEditModal :global(.modal-actions) {
+  margin-top: 22px;
+}
+.agreementSubmit {
+  min-width: 250px;
+  justify-content: center;
+  white-space: nowrap;
+}
+.contractFacultyPicker {
+  position: relative;
+}
+.contractFacultyPicker :global(.select-trigger) {
+  height: 42px;
+  border-radius: 7px;
+  font-size: 14px;
+}
+.facultySelect {
+  position: relative;
+  width: 100%;
+}
+.facultyTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid #dce3ed;
+  border-radius: 7px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+}
+.facultyTrigger span:first-child {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.facultyOpen .facultyTrigger {
+  border-color: #86aafc;
+  box-shadow: 0 0 0 3px #eaf0ff;
+}
+.facultyMenu {
+  position: absolute;
+  z-index: 25;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 4px;
+  border: 1px solid #dce3ed;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 12px 26px rgba(27, 43, 68, 0.14);
+}
+.facultySearch {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 3px;
+  padding: 7px 8px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  color: #8c98aa;
+}
+.facultySearch input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  padding: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+}
+.facultyOption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 11px;
+  border: 0;
+  border-radius: 5px;
+  background: #fff;
+  color: #536177;
+  font: inherit;
+  text-align: left;
+}
+.facultyOption:hover,
+.facultySelected {
+  background: #edf3ff;
+  color: var(--blue);
+}
+.facultyEmpty {
+  display: block;
+  padding: 10px 11px;
+  color: #9aa4b2;
+}
+.statusModal {
+  position: relative;
+  width: min(100%, 540px);
+  background: #fff;
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: 0 20px 60px #17223833;
+}
+.statusHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.statusHeader h2 {
+  flex: 1;
+  margin: 0;
+  color: #111820;
+  font:
+    700 18px/1.3 Manrope,
+    sans-serif;
+}
+.statusFields {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+}
+.statusFields label {
+  display: grid;
+  gap: 6px;
+  color: #52627b;
+  font-size: 14px;
+}
+.statusFields textarea {
+  min-height: 105px;
+  resize: vertical;
+  border: 1px solid #dce3ed;
+  border-radius: 7px;
+  padding: 10px 12px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.4;
+  outline: 0;
+}
+.statusFields textarea:focus {
+  border-color: #86aafc;
+  box-shadow: 0 0 0 3px #eaf0ff;
+}
+.statusFields textarea::placeholder {
+  color: #9aa4b2;
+}
+.statusModal :global(.select-trigger) {
+  height: 42px;
+  border-color: #dce3ed;
+  border-radius: 7px;
+  font-size: 14px;
+}
+.statusModal :global(.select-option) {
+  font-size: 14px;
+}
+.statusModal :global(.modal-actions) {
+  margin-top: 20px;
+  padding-top: 0;
+  border-top: 0;
+}
+.statusModal :global(.modal-actions button) {
+  min-width: 108px;
+  justify-content: center;
+  font-size: 13px;
+}
+.currentStatus {
+  display: none;
+}
+@media (max-width: 700px) {
+  .contractEditFields {
+    grid-template-columns: 1fr;
+  }
+}
