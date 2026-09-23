@@ -2,6 +2,7 @@ import { ArrowUpRight, ChevronDown, ChevronRight, Folder, Plus, Search } from 'l
 import { type FormEvent, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
+import { useModalAccessibility } from '../shared/hooks/useModalAccessibility'
 import type { Organization } from '../shared/types'
 import { PageHeader } from '../shared/ui/PageHeader'
 import { Select } from '../shared/ui/Select'
@@ -189,7 +190,12 @@ export function OrganizationsPage() {
   const [selectedFaculty, setSelectedFaculty] = useState('Все факультеты')
   const [year, setYear] = useState('Любой год окончания')
   const [isCreateModalOpen, setCreateModalOpen] = useState(false)
-  const [newOrganization, setNewOrganization] = useState<NewOrganizationForm>(initialNewOrganization)
+  const [newOrganization, setNewOrganization] =
+    useState<NewOrganizationForm>(initialNewOrganization)
+  const createDialogRef = useModalAccessibility<HTMLFormElement>(
+    () => setCreateModalOpen(false),
+    isCreateModalOpen,
+  )
   const filteredRows = useMemo(
     () =>
       rows.filter(
@@ -244,8 +250,16 @@ export function OrganizationsPage() {
             if (event.target === event.currentTarget) setCreateModalOpen(false)
           }}
         >
-          <form className="new-organization-modal" onSubmit={saveNewOrganization}>
-            <h2>Новая организация</h2>
+          <form
+            ref={createDialogRef}
+            className="new-organization-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="new-organization-title"
+            tabIndex={-1}
+            onSubmit={saveNewOrganization}
+          >
+            <h2 id="new-organization-title">Новая организация</h2>
             <label className="new-organization-field">
               Краткое наименование
               <input

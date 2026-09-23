@@ -14,6 +14,7 @@ import {
   type ApplicationForm,
   RegisterApplicationModal,
 } from '../features/register-application/ui/RegisterApplicationModal'
+import { useModalAccessibility } from '../shared/hooks/useModalAccessibility'
 import { FACULTIES } from '../shared/lib/faculties'
 import { PageHeader } from '../shared/ui/PageHeader'
 import { Select } from '../shared/ui/Select'
@@ -117,6 +118,10 @@ export function OrganizationPage() {
   const [isContractEditOpen, setContractEditOpen] = useState(false)
   const [agreement, setAgreement] = useState(initialAgreement)
   const [isAgreementOpen, setAgreementOpen] = useState(false)
+  const requisitesDialogRef = useModalAccessibility<HTMLFormElement>(
+    () => setRequisitesOpen(false),
+    isRequisitesOpen,
+  )
 
   const openRequisites = () => {
     setEditedRequisites(requisites)
@@ -340,11 +345,19 @@ export function OrganizationPage() {
             if (event.target === event.currentTarget) setRequisitesOpen(false)
           }}
         >
-          <form className="requisites-modal" onSubmit={saveRequisites}>
+          <form
+            ref={requisitesDialogRef}
+            className="requisites-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="requisites-modal-title"
+            tabIndex={-1}
+            onSubmit={saveRequisites}
+          >
             <div className="modal-header">
               <div>
                 <div className="eyebrow">РЕКВИЗИТЫ ОРГАНИЗАЦИИ</div>
-                <h2>Редактировать реквизиты</h2>
+                <h2 id="requisites-modal-title">Редактировать реквизиты</h2>
                 <p>Обновите данные организации-заказчика.</p>
               </div>
               <button

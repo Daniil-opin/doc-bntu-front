@@ -30,4 +30,29 @@ describe('RegisterApplicationModal', () => {
     expect(onChange).toHaveBeenCalledWith({ ...application, number: 'З-2026/001' })
     expect(onClose).toHaveBeenCalledOnce()
   })
+
+  it('exposes dialog semantics, traps focus and closes with Escape', () => {
+    const onClose = vi.fn()
+    render(
+      <RegisterApplicationModal
+        application={{ receivedDate: '', number: '', signedDate: '', faculties: [] }}
+        organizationName="ОАО «МТЗ»"
+        onChange={vi.fn()}
+        onClose={onClose}
+        onSave={vi.fn()}
+      />,
+    )
+
+    const dialog = screen.getByRole('dialog', { name: 'Зарегистрировать заявку' })
+    const closeButton = screen.getByRole('button', { name: 'Закрыть' })
+    const submitButton = screen.getByRole('button', { name: 'Зарегистрировать заявку' })
+
+    expect(dialog).toHaveAttribute('aria-modal', 'true')
+    submitButton.focus()
+    fireEvent.keyDown(submitButton, { key: 'Tab' })
+    expect(closeButton).toHaveFocus()
+
+    fireEvent.keyDown(dialog, { key: 'Escape' })
+    expect(onClose).toHaveBeenCalledOnce()
+  })
 })

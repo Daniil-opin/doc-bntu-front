@@ -1,6 +1,7 @@
 import { ChevronDown, X } from 'lucide-react'
 import { type FormEvent, useState } from 'react'
 
+import { useModalAccessibility } from '../../../shared/hooks/useModalAccessibility'
 import { FACULTIES } from '../../../shared/lib/faculties'
 import styles from './RegisterApplicationModal.module.css'
 
@@ -28,6 +29,7 @@ export function RegisterApplicationModal({
 }: RegisterApplicationModalProps) {
   const [isFacultyOpen, setFacultyOpen] = useState(false)
   const [facultyQuery, setFacultyQuery] = useState('')
+  const dialogRef = useModalAccessibility<HTMLFormElement>(onClose)
   const filteredFaculties = FACULTIES.filter((faculty) =>
     faculty.toLowerCase().includes(facultyQuery.toLowerCase()),
   )
@@ -49,10 +51,20 @@ export function RegisterApplicationModal({
         if (event.target === event.currentTarget) onClose()
       }}
     >
-      <form className={styles.modal} onSubmit={onSave}>
+      <form
+        ref={dialogRef}
+        className={styles.modal}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="register-application-title"
+        tabIndex={-1}
+        onSubmit={onSave}
+      >
         <div className="modal-header">
           <div>
-            <h2 className={styles.title}>Зарегистрировать заявку</h2>
+            <h2 className={styles.title} id="register-application-title">
+              Зарегистрировать заявку
+            </h2>
             <p>{organizationName} · заявка уже получена от организации</p>
           </div>
           <button className="icon-button" type="button" aria-label="Закрыть" onClick={onClose}>

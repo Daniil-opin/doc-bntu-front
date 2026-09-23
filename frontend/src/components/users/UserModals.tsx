@@ -1,6 +1,7 @@
 import { Clipboard, Eye, EyeOff, RefreshCw, Trash2, X } from 'lucide-react'
 import { FormEvent, useState } from 'react'
 
+import { useModalAccessibility } from '../../shared/hooks/useModalAccessibility'
 import { type Role, USER_ROLE_LABELS, UserRole } from '../../shared/types'
 import { Select } from '../../shared/ui/Select'
 import styles from './UserModals.module.css'
@@ -25,6 +26,8 @@ export function DeleteModal({
   onCancel: () => void
   onConfirm: () => void
 }) {
+  const dialogRef = useModalAccessibility<HTMLDivElement>(onCancel)
+
   return (
     <div
       className="modal-backdrop"
@@ -33,14 +36,21 @@ export function DeleteModal({
         if (event.target === event.currentTarget) onCancel()
       }}
     >
-      <div className={`modal ${styles.deleteModal}`}>
+      <div
+        ref={dialogRef}
+        className={`modal ${styles.deleteModal}`}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="delete-user-title"
+        tabIndex={-1}
+      >
         <div className={styles.deleteModalIcon}>
           <Trash2 size={22} />
         </div>
         <div className="modal-header">
           <div>
             <div className={`eyebrow ${styles.deleteEyebrow}`}>УДАЛЕНИЕ ПОЛЬЗОВАТЕЛЯ</div>
-            <h2>Удалить пользователя?</h2>
+            <h2 id="delete-user-title">Удалить пользователя?</h2>
             <p>Пользователь «{user.fullName}» больше не сможет войти в систему.</p>
           </div>
           <button className="icon-button" type="button" aria-label="Закрыть" onClick={onCancel}>
@@ -82,6 +92,7 @@ export function UserModal({
   const [password, setPassword] = useState(generatePassword)
   const [showPassword, setShowPassword] = useState(false)
   const [copied, setCopied] = useState(false)
+  const dialogRef = useModalAccessibility<HTMLFormElement>(onClose)
   const submit = (event: FormEvent) => {
     event.preventDefault()
     onSave({
@@ -104,11 +115,21 @@ export function UserModal({
         if (event.target === event.currentTarget) onClose()
       }}
     >
-      <form className="modal" onSubmit={submit}>
+      <form
+        ref={dialogRef}
+        className="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="user-modal-title"
+        tabIndex={-1}
+        onSubmit={submit}
+      >
         <div className="modal-header">
           <div>
             <div className="eyebrow">АДМИНИСТРИРОВАНИЕ</div>
-            <h2>{mode === 'edit' ? 'Изменить пользователя' : 'Новый пользователь'}</h2>
+            <h2 id="user-modal-title">
+              {mode === 'edit' ? 'Изменить пользователя' : 'Новый пользователь'}
+            </h2>
             <p>
               {mode === 'edit'
                 ? 'Обновите данные учётной записи'

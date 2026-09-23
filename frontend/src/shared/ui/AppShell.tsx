@@ -9,10 +9,11 @@ import {
   Settings,
   Users,
 } from 'lucide-react'
-import { type ReactNode, useState } from 'react'
+import { type ReactNode, useEffect, useMemo, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import { useAuth } from '../../app/providers'
+import { checkApiHealth } from '../api/client'
 
 const links = [
   { to: '/', label: 'Организации', icon: Building2 },
@@ -25,6 +26,52 @@ const links = [
 export function AppShell({ children }: { children: ReactNode }) {
   const { user, signOut } = useAuth()
   const [collapsed, setCollapsed] = useState(false)
+  const [apiStatus, setApiStatus] = useState<'checking' | 'connected' | 'unavailable'>('checking')
+  const currentDate = useMemo(
+    () =>
+      new Intl.DateTimeFormat('ru-RU', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+      }).format(new Date()),
+    [],
+  )
+
+  useEffect(() => {
+    let activeController: AbortController | null = null
+
+    const updateApiStatus = async () => {
+      activeController?.abort()
+      const controller = new AbortController()
+      activeController = controller
+      const timeout = window.setTimeout(() => controller.abort(), 5000)
+      const isAvailable = await checkApiHealth(controller.signal)
+      window.clearTimeout(timeout)
+      if (activeController === controller) {
+        setApiStatus(isAvailable ? 'connected' : 'unavailable')
+      }
+    }
+
+    void updateApiStatus()
+    const interval = window.setInterval(updateApiStatus, 30_000)
+    window.addEventListener('online', updateApiStatus)
+    window.addEventListener('offline', updateApiStatus)
+
+    return () => {
+      activeController?.abort()
+      activeController = null
+      window.clearInterval(interval)
+      window.removeEventListener('online', updateApiStatus)
+      window.removeEventListener('offline', updateApiStatus)
+    }
+  }, [])
+
+  const apiStatusLabel = {
+    checking: 'Проверка API…',
+    connected: 'API подключен',
+    unavailable: 'API недоступен',
+  }[apiStatus]
+
   return (
     <div className={`app-shell ${collapsed ? 'sidebar-collapsed' : ''}`}>
       <aside className="sidebar">
@@ -53,8 +100,8 @@ export function AppShell({ children }: { children: ReactNode }) {
           ))}
         </nav>
         <div className="sidebar-bottom">
-          <div className="connection">
-            <span /> API подключен
+          <div className={`connection connection-${apiStatus}`} role="status" aria-live="polite">
+            <span /> {apiStatusLabel}
           </div>
           <button
             className="user-menu"
@@ -81,7 +128,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           <div className="breadcrumb">
             <LayoutDashboard size={16} /> БНТУ <span>/</span> Управление
           </div>
-          <div className="topbar-date">22 сентября 2026</div>
+          <div className="topbar-date">{currentDate}</div>
         </header>
         <section className="content">{children}</section>
       </main>

@@ -23,6 +23,15 @@ body {
   min-width: 320px;
 }
 
+.page-loading {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+
 button,
 input,
 select {
@@ -148,6 +157,14 @@ nav a.active svg {
   height: 7px;
   background: #4fc29e;
   border-radius: 50%;
+}
+
+.connection-checking span {
+  background: #e1ad5b;
+}
+
+.connection-unavailable span {
+  background: #e06b6b;
 }
 
 .user-menu {

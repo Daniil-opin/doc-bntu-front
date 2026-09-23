@@ -1,6 +1,7 @@
 import { ChevronDown, Search, X } from 'lucide-react'
 import { FormEvent, useState } from 'react'
 
+import { useModalAccessibility } from '../../shared/hooks/useModalAccessibility'
 import { Select } from '../../shared/ui/Select'
 import styles from './OrganizationModals.module.css'
 
@@ -96,6 +97,8 @@ export function AgreementModal({
   onClose: () => void
   onSave: (event: FormEvent) => void
 }) {
+  const dialogRef = useModalAccessibility<HTMLFormElement>(onClose)
+
   return (
     <div
       className="modal-backdrop"
@@ -104,9 +107,17 @@ export function AgreementModal({
         if (event.target === event.currentTarget) onClose()
       }}
     >
-      <form className={styles.agreementModal} onSubmit={onSave}>
+      <form
+        ref={dialogRef}
+        className={styles.agreementModal}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="agreement-modal-title"
+        tabIndex={-1}
+        onSubmit={onSave}
+      >
         <div className="modal-header">
-          <h2>Регистрация дополнительного соглашения</h2>
+          <h2 id="agreement-modal-title">Регистрация дополнительного соглашения</h2>
           <button className="icon-button" type="button" aria-label="Закрыть" onClick={onClose}>
             <X size={18} />
           </button>
@@ -157,6 +168,8 @@ export function ContractEditModal({
   onClose: () => void
   onSave: (event: FormEvent) => void
 }) {
+  const dialogRef = useModalAccessibility<HTMLFormElement>(onClose)
+
   return (
     <div
       className="modal-backdrop"
@@ -165,9 +178,17 @@ export function ContractEditModal({
         if (event.target === event.currentTarget) onClose()
       }}
     >
-      <form className={styles.contractEditModal} onSubmit={onSave}>
+      <form
+        ref={dialogRef}
+        className={styles.contractEditModal}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="contract-edit-modal-title"
+        tabIndex={-1}
+        onSubmit={onSave}
+      >
         <div className="modal-header">
-          <h2>Редактировать договор</h2>
+          <h2 id="contract-edit-modal-title">Редактировать договор</h2>
           <button className="icon-button" type="button" aria-label="Закрыть" onClick={onClose}>
             <X size={18} />
           </button>
@@ -243,6 +264,8 @@ export function StatusModal({
     { value: 'Активен', label: 'Активен' },
     { value: 'Закрыт', label: 'Закрыт' },
   ]
+  const dialogRef = useModalAccessibility<HTMLFormElement>(onClose)
+
   return (
     <div
       className="modal-backdrop"
@@ -251,9 +274,19 @@ export function StatusModal({
         if (event.target === event.currentTarget) onClose()
       }}
     >
-      <form className={styles.statusModal} onSubmit={onSave}>
+      <form
+        ref={dialogRef}
+        className={styles.statusModal}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="status-modal-title"
+        tabIndex={-1}
+        onSubmit={onSave}
+      >
         <div className={styles.statusHeader}>
-          <h2>Сменить статус договора д.с. №1 от 06.05.2025 №221-АТФ/280 от 01.10.2020</h2>
+          <h2 id="status-modal-title">
+            Сменить статус договора д.с. №1 от 06.05.2025 №221-АТФ/280 от 01.10.2020
+          </h2>
           <button className="icon-button" type="button" aria-label="Закрыть" onClick={onClose}>
             <X size={18} />
           </button>
