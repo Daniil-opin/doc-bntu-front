@@ -12,6 +12,9 @@
   --blue: #246bfd;
   --navy: #172238;
   --mint: #2ca68a;
+  --content-max-width: 1600px;
+  --content-padding-block: 40px;
+  --content-padding-inline: 32px;
 }
 
 * {
@@ -218,7 +221,7 @@ nav a.active svg {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 52px;
+  padding: 0 var(--content-padding-inline);
 }
 
 .breadcrumb {
@@ -243,9 +246,11 @@ nav a.active svg {
 }
 
 .content {
-  max-width: 1230px;
+  width: 100%;
+  max-width: var(--content-max-width);
+  min-width: 0;
   margin: 0 auto;
-  padding: 52px;
+  padding: var(--content-padding-block) var(--content-padding-inline);
 }
 
 .page-header {
@@ -614,7 +619,7 @@ th {
 }
 
 td {
-  padding: 17px 18px;
+  padding: 17px 14px;
   border-bottom: 1px solid #edf0f4;
   color: #536177;
 }
@@ -983,12 +988,9 @@ tr:last-child td {
     margin-left: 72px;
   }
 
-  .content {
-    padding: 32px 22px;
-  }
-
-  .topbar {
-    padding: 0 22px;
+  :root {
+    --content-padding-block: 32px;
+    --content-padding-inline: 22px;
   }
 
   .detail-grid,
@@ -1033,8 +1035,9 @@ tr:last-child td {
     display: none;
   }
 
-  .content {
-    padding: 28px 15px;
+  :root {
+    --content-padding-block: 28px;
+    --content-padding-inline: 15px;
   }
 
   .toolbar {

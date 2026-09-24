@@ -1,0 +1,1 @@
+import{r as e}from"./index-DYXJdd58.js";var t=e(),n={ACTIVE:`Активна`,DRAFT:`Черновик`,REVIEW:`На проверке`,SIGNED:`Подписан`,ARCHIVED:`Архив`};function r({status:e}){return(0,t.jsx)(`span`,{className:`status status-${e.toLowerCase()}`,children:n[e]})}export{r as t};

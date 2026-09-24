@@ -1,0 +1,47 @@
+.table {
+  min-width: 980px;
+}
+
+.table th:nth-child(1) {
+  min-width: 125px;
+}
+
+.table th:nth-child(2) {
+  min-width: 180px;
+}
+
+.table th:nth-child(3),
+.table th:nth-child(4) {
+  min-width: 130px;
+}
+
+.table th:nth-child(5) {
+  min-width: 260px;
+}
+
+.faculties {
+  display: block;
+  max-width: 340px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.scanAction {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.scanAction:hover {
+  text-decoration: underline;
+}
+
+.noScan {
+  color: #9aa4b2;
+  font-size: 12px;
+}

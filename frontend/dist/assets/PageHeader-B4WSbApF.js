@@ -1,0 +1,1 @@
+import{r as e}from"./index-DYXJdd58.js";var t=e();function n({eyebrow:e,title:n,description:r,action:i}){return(0,t.jsxs)(`div`,{className:`page-header`,children:[(0,t.jsxs)(`div`,{children:[e&&(0,t.jsx)(`div`,{className:`eyebrow`,children:e}),(0,t.jsx)(`h1`,{children:n}),r&&(0,t.jsx)(`p`,{children:r})]}),i]})}export{n as t};

@@ -12,6 +12,7 @@ interface SelectProps<T extends string> {
   className?: string
   disabled?: boolean
   name?: string
+  ariaLabel?: string
   searchable?: boolean
   searchPlaceholder?: string
 }
@@ -23,6 +24,7 @@ export function Select<T extends string>({
   className = '',
   disabled = false,
   name,
+  ariaLabel,
   searchable = false,
   searchPlaceholder = 'Поиск',
 }: SelectProps<T>) {
@@ -133,6 +135,7 @@ export function Select<T extends string>({
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-controls={listboxId}
+        aria-label={ariaLabel}
         disabled={disabled}
         onKeyDown={handleKeyDown}
         onClick={() => {
@@ -154,7 +157,7 @@ export function Select<T extends string>({
           className="select-menu"
           id={listboxId}
           role="listbox"
-          aria-label={name}
+          aria-label={ariaLabel ?? name}
           tabIndex={-1}
           onKeyDown={handleKeyDown}
         >
